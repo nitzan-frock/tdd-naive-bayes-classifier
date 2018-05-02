@@ -17,6 +17,10 @@ var labelProbabilities = [];
 var chordCountsInLabels = {};
 var probabilityOfChordsInLabels = {};
 
+var easy = 'easy';
+var medium = 'medium';
+var hard = 'hard';
+
 function train(chords, label){
   songs.push([label, chords]);
   labels.push(label);
@@ -67,15 +71,15 @@ function setProbabilityOfChordsInLabels(){
   });
 };
 
-train(imagine, 'easy');
-train(somewhereOverTheRainbow, 'easy');
-train(tooManyCooks, 'easy');
-train(iWillFollowYouIntoTheDark, 'medium');
-train(babyOneMoreTime, 'medium');
-train(creep, 'medium');
-train(paperBag, 'hard');
-train(toxic, 'hard');
-train(bulletproof, 'hard');
+train(imagine, easy);
+train(somewhereOverTheRainbow, easy);
+train(tooManyCooks, easy);
+train(iWillFollowYouIntoTheDark, medium);
+train(babyOneMoreTime, medium);
+train(creep, medium);
+train(paperBag, hard);
+train(toxic, hard);
+train(bulletproof, hard);
 setLabelProbabilities();
 setChordCountsInLabels();
 setProbabilityOfChordsInLabels();
