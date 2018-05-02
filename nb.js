@@ -1,5 +1,3 @@
-fs = require('fs');
-// songs
 imagine = ['c', 'cmaj7', 'f', 'am', 'dm', 'g', 'e7'];
 somewhereOverTheRainbow = ['c', 'em', 'f', 'g', 'am'];
 tooManyCooks = ['c', 'g', 'f'];
@@ -18,6 +16,7 @@ var labelCounts = [];
 var labelProbabilities = [];
 var chordCountsInLabels = {};
 var probabilityOfChordsInLabels = {};
+
 function train(chords, label){
   songs.push([label, chords]);
   labels.push(label);
@@ -26,21 +25,24 @@ function train(chords, label){
       allChords.push(chords[index]);
     }
   }
-  if(!!(Object.keys(labelCounts).includes(label))){
+  if((Object.keys(labelCounts).includes(label))){
     labelCounts[label] = labelCounts[label] + 1;
   } else {
     labelCounts[label] = 1;
   }
 };
+
 function getNumberOfSongs(){
    return songs.length;
 };
+
 function setLabelProbabilities(){
   Object.keys(labelCounts).forEach(function(label){
     var numberOfSongs = getNumberOfSongs();
     labelProbabilities[label] = labelCounts[label] / numberOfSongs;
   });
 };
+
 function setChordCountsInLabels(){
   songs.forEach(function(index){
     if(chordCountsInLabels[index[0]] === undefined){
@@ -54,15 +56,17 @@ function setChordCountsInLabels(){
       }
     });
   });
-}
+};
+
 function setProbabilityOfChordsInLabels(){
   probabilityOfChordsInLabels = chordCountsInLabels;
   Object.keys(probabilityOfChordsInLabels).forEach(function(difficulty){
     Object.keys(probabilityOfChordsInLabels[difficulty]).forEach(function(chords){
-      probabilityOfChordsInLabels[difficulty][chords] = probabilityOfChordsInLabels[difficulty][chords] * 1.0 / songs.length;
+      probabilityOfChordsInLabels[difficulty][chords] = probabilityOfChordsInLabels[difficulty][chords] / songs.length;
     });
   });
-}
+};
+
 train(imagine, 'easy');
 train(somewhereOverTheRainbow, 'easy');
 train(tooManyCooks, 'easy');
@@ -75,6 +79,7 @@ train(bulletproof, 'hard');
 setLabelProbabilities();
 setChordCountsInLabels();
 setProbabilityOfChordsInLabels();
+
 function classify(chords){
   var total = labelProbabilities;
   console.log(total);
