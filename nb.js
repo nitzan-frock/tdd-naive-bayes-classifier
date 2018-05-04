@@ -1,10 +1,12 @@
-function fileName(){
-  var theError = new Error("here I am");
-  return theError.stack.match(/\/(\w+\.js)\:/)[1]
+// function fileName(){
+//   var theError = new Error("here I am");
+//   return theError.stack.match(/\/(\w+\.js)\:/)[1]
 
-};
+// };
 
-console.log(`Welcome to ${fileName()}!`);
+let fileName = 'nb.js';
+
+console.log(`Welcome to ${fileName}!`);
 
 imagine = ['c', 'cmaj7', 'f', 'am', 'dm', 'g', 'e7'];
 somewhereOverTheRainbow = ['c', 'em', 'f', 'g', 'am'];
@@ -20,8 +22,8 @@ bulletproof = ['d#m', 'g#', 'b', 'f#', 'g#m', 'c#'];
 var songs = [];
 var labels = [];
 var allChords = new Set();
-var labelCounts = [];
-var labelProbabilities = [];
+var labelCounts = {};
+var labelProbabilities = {};
 var chordCountsInLabels = {};
 var probabilityOfChordsInLabels = {};
 
