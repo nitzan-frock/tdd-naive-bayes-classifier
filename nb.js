@@ -33,7 +33,7 @@ var hard = 'hard';
 function train(chords, label) {
   songs.push({ label, chords });
   chords.forEach(chord => allChords.add(chord));
-  if ((Object.keys(labelCounts.keys()).includes(label))) {
+  if ((Array.from(labelCounts.keys()).includes(label))) {
     labelCounts.set(label, labelCounts.get(label) + 1);
   } else {
     labelCounts.set(label, 1);
