@@ -34,9 +34,12 @@ var labelProbabilities = new Map();
 var chordCountsInLabels = new Map();
 var probabilityOfChordsInLabels = {};
 
-var easy = 'easy';
-var medium = 'medium';
-var hard = 'hard';
+function setDifficulties(){
+  easy = 'easy';
+  medium = 'medium';
+  hard = 'hard';
+};
+setDifficulties();
 
 function train(chords, label) {
   songs.push({ label, chords });
