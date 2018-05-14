@@ -27,12 +27,15 @@ function setSongs(){
   bulletproof = ['d#m', 'g#', 'b', 'f#', 'g#m', 'c#'];
 }
 
-var songs = [];
-var allChords = new Set();
-var labelCounts = new Map();
-var labelProbabilities = new Map();
-var chordCountsInLabels = new Map();
-var probabilityOfChordsInLabels = {};
+function setup () {
+  songs = [];
+  allChords = new Set();
+  labelCounts = new Map();
+  labelProbabilities = new Map();
+  chordCountsInLabels = new Map();
+  probabilityOfChordsInLabels = new Map();
+};
+setup();
 
 function setDifficulties(){
   easy = 'easy';
