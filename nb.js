@@ -1,12 +1,13 @@
 // function fileName(){
 //   var theError = new Error("here I am");
-//   return theError.stack.match(/\/(\w+\.js)\:/)[1]
+//   //console.log(theError);
+//   console.log("the stack");
+//   console.log(theError.stack.match(/\/(\w+\.js)\:/)[1]);
+//   return theError.stack.match(/\/(\w+\.js)\:/)[1];
 
 // };
 
 let fileName = 'nb.js';
-
-console.log(`Welcome to ${fileName}!`);
 
 imagine = ['c', 'cmaj7', 'f', 'am', 'dm', 'g', 'e7'];
 somewhereOverTheRainbow = ['c', 'em', 'f', 'g', 'am'];
@@ -97,7 +98,24 @@ function classify(chords) {
     });
     classified.set(difficulty, first);
   });
-  console.log(classified);
+  return classified;
 };
-classify(['d', 'g', 'e', 'dm']);
-classify(['f#m7', 'a', 'dadd9', 'dmaj7', 'bm', 'bm7', 'd', 'f#m']);
+
+var wish = require('wish');
+describe('the file', function() {
+  it('classifies', function(){
+    var classified = classify(['f#m7', 'a', 'dadd9', 'dmaj7', 'bm', 'bm7', 'd', 'f#m']);
+    wish(classified.get('easy') === 1.3433333333333333);
+    wish(classified.get('medium') === 1.5060259259259259);
+    wish(classified.get('hard') === 1.6884223991769547);
+  });
+  it('classifies again', function(){
+    var classified = classify(['d', 'g', 'e', 'dm']);
+    wish(classified.get('easy') === 2.023094827160494);
+    wish(classified.get('medium') === 1.855758613168724);
+    wish(classified.get('hard') === 1.855758613168724);
+  });
+  it('sets welcome message', function() {
+    console.log(`Welcome to ${fileName}!`);
+  })
+});
