@@ -35,14 +35,12 @@ function setup () {
   chordCountsInLabels = new Map();
   probabilityOfChordsInLabels = new Map();
 };
-setup();
 
 function setDifficulties(){
   easy = 'easy';
   medium = 'medium';
   hard = 'hard';
 };
-setDifficulties();
 
 function train(chords, label) {
   songs.push({ label, chords });
@@ -78,12 +76,16 @@ function setChordCountsInLabels() {
 function setProbabilityOfChordsInLabels() {
   probabilityOfChordsInLabels = chordCountsInLabels;
   probabilityOfChordsInLabels.forEach(function (_chords, difficulty) {
-    Object.keys(probabilityOfChordsInLabels.get(difficulty)).forEach(function (chords) {
-      probabilityOfChordsInLabels.get(difficulty)[chords] /= songs.length;
+    Object.keys(probabilityOfChordsInLabels.get(difficulty)).forEach(
+      function (chords) {
+        probabilityOfChordsInLabels.get(difficulty)[chords] /= songs.length;
     });
   });
 };
+
 function trainAll(){
+  setDifficulties();
+  setup();
   setSongs();
   train(imagine, easy);
   train(somewhereOverTheRainbow, easy);
