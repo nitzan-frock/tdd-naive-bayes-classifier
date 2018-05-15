@@ -61,7 +61,7 @@ function setProbabilityOfChordsInLabels() {
 };
 
 function trainAll() {
-    songList.songs.forEach(function(song){
+    songList.songs.forEach(function (song) {
         train(song.chords, song.difficulty);
     });
     setLabelsAndProbabilities();
@@ -76,17 +76,19 @@ function setLabelsAndProbabilities() {
 function classify(chords) {
     const smoothing = 1.01;
     const classified = new Map();
-    classifier.labelProbabilities.forEach(function (_probabilities, difficulty) {
-        let first = classifier.labelProbabilities.get(difficulty) + smoothing;
-        chords.forEach(function (chord) {
-            const probabilityOfChordInLabel =
-                classifier.probabilityOfChordsInLabels.get(difficulty)[chord];
-            if (probabilityOfChordInLabel) {
-                first = first * (probabilityOfChordInLabel + smoothing);
-            }
+    classifier.labelProbabilities.forEach(
+        function (_probabilities, difficulty) {
+            const totalLikelihood = chords.reduce(function (total, chord) {
+                const probabilityOfChordInLabel =
+                    classifier.probabilityOfChordsInLabels.get(difficulty)[chord];
+                if (probabilityOfChordInLabel) {
+                    return total * (probabilityOfChordInLabel + smoothing);
+                } else {
+                    return total;
+                }
+            }, classifier.labelProbabilities.get(difficulty) + smoothing);
+            classified.set(difficulty, totalLikelihood);
         });
-        classified.set(difficulty, first);
-    });
     return classified;
 };
 
