@@ -7,7 +7,9 @@ const classifier = {
         songs: [],
         allChords: new Set(),
         addSong (name, chords, difficulty) {
-            this.songs.push({name, chords,
+            this.songs.push({
+                name, 
+                chords,
                 difficulty: this.difficulties[difficulty]
             });
         }
